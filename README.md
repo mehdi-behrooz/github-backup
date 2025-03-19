@@ -11,7 +11,7 @@ github-backup:
     - /backups/github/:/backups/
   environment:
     - INSTANT_RUN=true
-    - CRON=* * * * *
+    - CRON=0 0 * * *
     - GITHUB_USERNAME=myusername
     - GITHUB_PASSWORD=123456
 ```
