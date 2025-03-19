@@ -1,0 +1,11 @@
+services:
+  github-backup:
+    build: .
+    container_name: github-backup
+    volumes:
+      - /backups/github/:/backups/
+    environment:
+      - INSTANT_RUN=true
+      - CRON=* * * * *
+      - GITHUB_USERNAME=${GITHUB_REPOSITORY_USERNAME}
+      - GITHUB_PASSWORD=${GITHUB_REPOSITORY_PASSWORD}
