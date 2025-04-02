@@ -1,9 +1,9 @@
 services:
-  github-backup:
+  test-github-backup:
     build: .
-    container_name: github-backup
+    container_name: test-github-backup
     volumes:
-      - /backups/github/:/backups/
+      - ./backups/:/backups/
     environment:
       - INSTANT_RUN=true
       - CRON=* * * * *
