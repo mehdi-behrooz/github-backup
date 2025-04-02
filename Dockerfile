@@ -10,6 +10,7 @@ COPY --chmod=755 backup.sh /usr/bin/backup.sh
 
 ENV INSTANT_RUN=true
 ENV CRON="0 3 * * *"
+ENV HEALTH_FLAG="/root/health_flag"
 
 ENTRYPOINT ["/sbin/tini", "--", "/usr/bin/entrypoint.sh"]
 VOLUME ["/backups"]
@@ -19,4 +20,6 @@ CMD [""]
 HEALTHCHECK --interval=5m \
     --start-period=5m \
     --start-interval=10s \
-    CMD pgrep crond || exit 1
+    CMD pgrep crond \
+        && [ "$(cat $HEALTH_FLAG 2>/dev/null)" = "0" ] \
+        || exit 1
